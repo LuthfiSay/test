@@ -2,7 +2,7 @@ import streamlit as st
 from nyoka import PMMLToSKL
 
 # Import model from PMML file
-pmml_model = PMMLToSKL("<path_to_pmml_file>")
+pmml_model = PMMLToSKL("revenue_prediction_model.pmml")
 pmml_model.initialize()
 
 # Streamlit UI
