@@ -24,4 +24,4 @@ if st.button("Predict"):
     }
 
     prediction = pmml_model.predict(input_data)
-    st.write("Prediction:", prediction)
+    st.write("Prediction:",prediction)
