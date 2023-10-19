@@ -1,0 +1,4 @@
+streamlit==1.27.0
+nyoka==5.5.0
+pandas
+numpy
