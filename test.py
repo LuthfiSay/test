@@ -1,18 +1,27 @@
-pip install pyPMML
-from google.colab import drive
-drive.mount('/content/drive')
-from pypmml import Model
-# Load the PMML model
-model = Model.fromFile('/content/drive/MyDrive/Data Analytics/Revenue Prediction/revenue_prediction_model.pmml')
-# Assuming you have some input data as a dictionary
-input_data = {
-    "Sum(Qty)": 886, #Qty tire michelin yang akan di billing dalam 1 bulan
-    "Sum(EM)": 616, #Qty tire Michelin Earthmover yang akan dibilling dalam 1 bulan
-    "Count(PODate)": 125, #Qty PO Michelin yang akan di billing dalam 1 bulan
-    "Mean(Leadtime)": 295.806, #Target lead time (satuan hari) dari Factory ke CP
-}
+import streamlit as st
+from nyoka import PMMLToSKL
 
-# Make prediction
-result = model.predict(input_data)
+# Import model from PMML file
+pmml_model = PMMLToSKL("<path_to_pmml_file>")
+pmml_model.initialize()
 
-print(result)
+# Streamlit UI
+st.title("Predictive Model PMML Web App")
+st.write("Enter numeric values for prediction:")
+
+input1 = st.number_input("Input 1", value=0.0)
+input2 = st.number_input("Input 2", value=0.0)
+input3 = st.number_input("Input 3", value=0.0)
+input4 = st.number_input("Input 4", value=0.0)
+
+if st.button("Predict"):
+    # Create a dictionary with input values
+    input_data = {
+        "input_column_name_1": input1,
+        "input_column_name_2": input2,
+        "input_column_name_3": input3,
+        "input_column_name_4": input4
+    }
+
+    prediction = pmml_model.predict(input_data)
+    st.write("Prediction:", prediction)
