@@ -23,9 +23,6 @@ input3 = int(st.number_input('Qty PO Micheline yang akan dihitung dalam 1 bulan'
 # Input 4
 input4 = float(st.number_input('Target leadtime (satuan hari) dari Factory ke CP', value=0.00, format="%.3f"))
 
-# # Input 4
-# input4 = st.number_input('Input 4', value=0.0, format="%.3f")
-
 # Prediksi ketika tombol ditekan
 if st.button('Prediksi'):
     # Lakukan prediksi dengan model
