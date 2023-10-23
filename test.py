@@ -3,7 +3,7 @@ import streamlit as st
 from pypmml import Model
 
 # Load the PMML model
-model = Model.fromFile('model.pmml')
+model = Model.fromFile('revenue_prediction_model.pmml')
 
 # prediction = model.predict([886, 616, 125, 295])
 # print(prediction)
