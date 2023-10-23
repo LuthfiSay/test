@@ -1,34 +1,34 @@
-# import streamlit as st
-# from nyoka import PMMLToSKL
-
-# # Import model from PMML file
-# pmml_model = PMMLToSKL("revenue_prediction_model.pmml")
-# pmml_model.initialize()
-
-# # Streamlit UI
-# st.title("Predictive Model PMML Web App")
-# st.write("Enter numeric values for prediction:")
-
-# input1 = st.number_input("Input 1", value=0.0)
-# input2 = st.number_input("Input 2", value=0.0)
-# input3 = st.number_input("Input 3", value=0.0)
-# input4 = st.number_input("Input 4", value=0.0)
-
-# if st.button("Predict"):
-#     # Create a dictionary with input values
-#     input_data = {
-#         "input_column_name_1": input1,
-#         "input_column_name_2": input2,
-#         "input_column_name_3": input3,
-#         "input_column_name_4": input4
-#     }
-
-#     prediction = pmml_model.predict(input_data)
-#     st.write("Prediction:",prediction)
+# app.py
 import streamlit as st
+from pypmml import Model
 
-st.title('Hello, Streamlit!')
+# Load the PMML model
+model = Model.fromFile('model.pmml')
 
-st.write("Here's a simple slider:")
-slider_value = st.slider('Select a value', 0, 100, 50)
-st.write('Selected value:', slider_value)
+# prediction = model.predict([886, 616, 125, 295])
+# print(prediction)
+
+# Judul Aplikasi
+st.title('Aplikasi Prediksi')
+
+# Input 1
+input1 = int(st.number_input('Qty Tire Micheline yang akan di Billing dalam 1 bulan', value=0))
+
+# Input 2
+input2 = int(st.number_input('Qty Tire Micheline Earthmover yang akan di Billing dalam 1 bulan', value=0))
+
+# Input 3
+input3 = int(st.number_input('Qty PO Micheline yang akan dihitung dalam 1 bulan', value=0))
+
+# Input 4
+input4 = float(st.number_input('Target leadtime (satuan hari) dari Factory ke CP', value=0.00, format="%.3f"))
+
+# # Input 4
+# input4 = st.number_input('Input 4', value=0.0, format="%.3f")
+
+# Prediksi ketika tombol ditekan
+if st.button('Prediksi'):
+    # Lakukan prediksi dengan model
+    prediction = model.predict([input1, input2, input3, input4])
+    prediction_str = str(prediction)
+    st.write('Hasil Prediksi: ', prediction_str)
